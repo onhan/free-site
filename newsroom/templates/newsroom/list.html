@@ -1,0 +1,8 @@
+<div class="home__articles">
+    {% for article in articles %}
+	    {% include article.summary_template with include_image=include_image include_summary=include_summary md_size=md_size %}
+    {% empty %}
+	<p>No articles found.</p>
+    {% endfor %}
+
+</div>

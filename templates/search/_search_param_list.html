@@ -1,0 +1,32 @@
+{% load humanize %}
+<p>
+  {% if adv_search_form.cleaned_data.adv_search %}
+    <strong>Keywords:</strong> {{ adv_search_form.cleaned_data.adv_search }}&emsp;
+  {% endif %}
+  {% if adv_search_form.cleaned_data.search_type %}
+    {% if adv_search_form.cleaned_data.search_type == "both" %}
+      <strong>Content:</strong> Articles & Images&emsp;
+    {% elif adv_search_form.cleaned_data.search_type == "image" %}
+      <strong>Content:</strong> Images&emsp;
+    {% else %}
+      <strong>Content:</strong> Articles&emsp;
+    {% endif %}
+  {% endif %}
+  {% if adv_search_form.cleaned_data.author %}
+    <strong>Author:</strong> {{ adv_search_form.cleaned_data.author }}&emsp;
+  {% endif %}
+  {% if adv_search_form.cleaned_data.category %}
+    <strong>Category:</strong> {{ adv_search_form.cleaned_data.category }}&emsp;
+  {% endif %}
+  {% if adv_search_form.cleaned_data.topics %}
+    <strong>Topic:</strong> {{ adv_search_form.cleaned_data.topics }}&emsp;
+  {% endif %}
+  {% if request.GET.date_from %}
+    <strong>From:</strong> {{ request.GET.date_from }}&emsp;
+  {% endif %}
+  {% if request.GET.date_to %}
+    <strong>To:</strong> {{ request.GET.date_to }}&emsp;
+  {% endif %}
+  <strong>Page:</strong> {{ page_num }} of {{num_pages}}&emsp;
+  <strong>Items:</strong> {{num_items|intcomma}}
+</p>

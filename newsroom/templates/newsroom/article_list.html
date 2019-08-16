@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if title %}{{title}}{% else %}{{heading}}{% endif %} {{block.super}}
+{% endblock %}
+
+{% block content %}
+    {% block article-list %}
+	<div id="list-content" class="home">
+            {% block content-intro %}
+                <div class="article-list-top">
+                    <div class="topic-intro">
+	                {% if heading %}
+		            <h1 id="summary-list-heading">
+		                {{heading|safe}}
+		            </h1>
+	                {% endif %}
+	                {% if image %}
+		            <div>
+		                <img src="{{MEDIA_URL}}{{image}}" />
+		            </div>
+	                {% endif %}
+	                {% if description %}
+		            <p>{{description|safe}}</p>
+	                {% endif %}
+                    </div>
+                </div>
+	    {% endblock %}
+            <div class="home_container">
+
+                <div  class="home__article-list">
+		    {% include 'newsroom/list.html' with articles=article_list include_image="1" include_summary="1" md_size="12" %}
+	            {% include 'paginator.html' %}
+	        </div>
+	    </div>
+        </div>
+    {% endblock %}
+
+{% endblock %}

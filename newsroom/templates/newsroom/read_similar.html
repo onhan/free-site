@@ -1,0 +1,19 @@
+
+{% if related %}
+<div id="related">
+    {% for rel_article in related %}
+        {% if forloop.first %}
+            <h3>More about <a href="{% url 'newsroom:topic.detail' article.main_topic.slug %}">
+                {{article.main_topic}}</a></h3>
+            <ul>
+        {% endif %}
+        <li>
+            <a href="{{rel_article.get_absolute_url}}">
+                {{rel_article.title}}</a> <span class="related-date">{{rel_article.published|date:"d F Y" }}</span>
+        </li>
+        {% if forloop.last %}
+            </ul>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}

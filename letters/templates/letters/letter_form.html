@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}
+    Letter to the editor in response to {{article}}
+{% endblock %}
+{% block content %}
+    <div class="container letter-form-page">
+        {% if problem == False %}
+	    <div class="row">
+	        <div class="col-xs-12 col-md-8">
+                    <div id="letter-tips">
+                        <h2>
+			    Tips for getting your letter published
+		        </h2>
+
+			<p>
+			    Letters are only published if approved by our
+			    editors. Views expressed in letters are not
+			    necessarily endorsed by GroundUp.</p>
+			<ol>
+			    <li>Keep it short: 100 to 350 words.</li>
+			    <li>Provide relevant information or
+				arguments.
+			    </li>
+			    <li>Be polite and respectful.
+				No gratuitous insults.
+			    </li>
+			    <li>
+				Use your real name(s) unless there
+				are exceptional circumstances.
+			    </li>
+			    <li>
+				Use <a href="http://www.plainenglish.co.uk/free-guides.html">plain English</a>.
+			    </li>
+			</ol>
+                        <p style="font-weight: bold;">
+                            We may edit letters for typos, grammar and
+                            style. We also may change the title of the letter.
+                        </p>
+                    </div>
+                    <div id="letter-preview" style="display:none;">
+                        {% include "letters/letter_text.html" %}
+                    </div>
+		    <form id="letter-form"
+                          action="{% url 'letters:letter_to_editor' article.pk %}"
+		          method="post">
+		        {% csrf_token %}
+                        <div id="letter-input-fields">
+		            <p id="letter-form-salutation">Dear Editor</p>
+		            <p id="letter-form-article-title">
+			        This is a letter in response to
+			        <a href={% url 'newsroom:article.detail' article.slug  %}>
+			            {{article.title|safe}}</a>.
+		            </p>
+		            {{ form.as_p }}
+                        </div>
+		        <input id="submit-button"
+                               type="Submit" value="Send letter" />
+		    </form>
+		</div>
+	    </div>
+        {% endif %}
+    </div>
+{% endblock %}

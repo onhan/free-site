@@ -1,0 +1,32 @@
+{% if letter.replace_with_note == True %}
+
+{{letter.note_to_writer|safe|linebreaks}}
+
+{% else %}
+
+<p>
+Dear {{letter.byline}}
+</p>
+
+<p>
+You wrote a letter to GroundUp in response to the article:<br />
+{{letter.article.title}}
+</p>
+
+<p>
+The title of your letter is:<br />
+{{letter.title}}
+</p>
+
+<p>
+After carefully considering your letter, we regret that we have decided not to
+publish it.
+</p>
+
+{{letter.note_to_writer|safe|linebreaks}}
+
+<p>
+Regards<br/>
+GroundUp Editors
+</p>
+{% endif %}
